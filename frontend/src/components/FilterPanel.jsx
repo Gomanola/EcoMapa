@@ -5,6 +5,8 @@ import { WASTE_TYPES, PAYMENT_TYPES } from '../data/wasteTypes.js';
  * OSM data toggle, and action buttons.
  */
 export default function FilterPanel({
+  isOpen,
+  onClose,
   filters,
   onToggleType,
   onPaymentChange,
@@ -22,7 +24,10 @@ export default function FilterPanel({
     filters.types.size > 0 || filters.payment !== 'all' || filters.source !== 'all';
 
   return (
-    <aside className="filter-panel">
+    <aside className={`filter-panel ${isOpen ? 'open' : ''}`}>
+      <button className="filter-close-btn" onClick={onClose} aria-label="Cerrar">
+        ✕
+      </button>
       <div className="filter-panel-header">
         <div className="logo">♻️</div>
         <h1>EcoMapa</h1>

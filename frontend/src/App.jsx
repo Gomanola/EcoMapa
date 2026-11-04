@@ -36,6 +36,7 @@ export default function App() {
   const [userLocation, setUserLocation] = useState(null);
   const [showOsm, setShowOsm] = useState(false);
   const [mapBbox, setMapBbox] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const osmRequestRef = useRef(0);
 
@@ -218,7 +219,26 @@ export default function App() {
 
   return (
     <div className="app">
+      {/* Mobile top bar */}
+      <div className="mobile-topbar">
+        <div className="mobile-topbar-inner">
+          <button onClick={() => setSidebarOpen(true)} aria-label="Abrir menu">
+            ☰
+          </button>
+          <h2>♻️ EcoMapa</h2>
+          <span className="point-badge">{filteredPoints.length}</span>
+        </div>
+      </div>
+
+      {/* Sidebar overlay (mobile) */}
+      <div
+        className={`sidebar-overlay ${sidebarOpen ? 'visible' : ''}`}
+        onClick={() => setSidebarOpen(false)}
+      />
+
       <FilterPanel
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
         filters={filters}
         onToggleType={toggleTypeFilter}
         onPaymentChange={(payment) => setFilters((p) => ({ ...p, payment }))}
@@ -227,6 +247,7 @@ export default function App() {
         onAddPoint={() => {
           setShowAddForm(true);
           setAddMode(true);
+          setSidebarOpen(false);
         }}
         onImportOsm={handleImportOsm}
         importing={importing}
@@ -239,7 +260,10 @@ export default function App() {
       <MapView
         points={filteredPoints}
         selectedPoint={selectedPoint}
-        onSelectPoint={setSelectedPoint}
+        onSelectPoint={(p) => {
+          setSelectedPoint(p);
+          setSidebarOpen(false);
+        }}
         route={route}
         userLocation={userLocation}
         addMode={addMode}
@@ -248,6 +272,18 @@ export default function App() {
         onMapMove={handleMapMove}
         center={userLocation ? [userLocation.lat, userLocation.lng] : DEFAULT_CENTER}
       />
+
+      {/* Mobile FAB */}
+      <button
+        className="mobile-fab"
+        onClick={() => {
+          setShowAddForm(true);
+          setAddMode(true);
+        }}
+        aria-label="Agregar punto de recoleccion"
+      >
+        ➕
+      </button>
 
       {selectedPoint && (
         <PointDetails

@@ -1,0 +1,867 @@
+/* === EcoMapa - Global Styles === */
+
+:root {
+  --eco-primary: #16a34a;
+  --eco-primary-dark: #15803d;
+  --eco-primary-light: #dcfce7;
+  --eco-bg: #f0fdf4;
+  --eco-text: #1e293b;
+  --eco-muted: #64748b;
+  --eco-white: #ffffff;
+  --eco-error: #ef4444;
+  --eco-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --eco-radius: 12px;
+  --eco-sidebar-width: 340px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, sans-serif;
+  color: var(--eco-text);
+}
+
+/* === App Layout === */
+.app {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* === Sidebar / Filter Panel === */
+.filter-panel {
+  width: var(--eco-sidebar-width);
+  min-width: var(--eco-sidebar-width);
+  height: 100%;
+  background: linear-gradient(180deg, #14532d 0%, #166534 100%);
+  color: var(--eco-white);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.filter-panel-header {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.filter-panel-header h1 {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+}
+
+.filter-panel-header .logo {
+  font-size: 2rem;
+  margin-bottom: 4px;
+}
+
+.filter-panel-header p {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.filter-section {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.filter-section h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+
+/* Waste type checkboxes */
+.type-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.type-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.type-chip:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.type-chip.active {
+  border-color: var(--eco-white);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.type-chip .chip-icon {
+  font-size: 1rem;
+}
+
+.type-chip .chip-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Filter selects */
+.filter-select {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--eco-white);
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.filter-select option {
+  background: var(--eco-primary-dark);
+  color: var(--eco-white);
+}
+
+/* Toggle switch */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.toggle-row label {
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.toggle {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+  flex-shrink: 0;
+}
+
+.toggle.active {
+  background: var(--eco-primary);
+}
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.2s;
+}
+
+.toggle.active::after {
+  transform: translateX(18px);
+}
+
+/* Action buttons */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--eco-primary);
+  color: var(--eco-white);
+}
+
+.btn-primary:hover {
+  background: var(--eco-primary-dark);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--eco-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Point count badge */
+.point-count {
+  text-align: center;
+  padding: 12px;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.point-count strong {
+  font-size: 1.1rem;
+  color: var(--eco-white);
+}
+
+.clear-filters {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 6px;
+}
+
+.clear-filters:hover {
+  color: var(--eco-white);
+}
+
+/* === Map === */
+.map-container {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+.map-container.add-mode {
+  cursor: crosshair !important;
+}
+
+.map-container .leaflet-container {
+  width: 100%;
+  height: 100%;
+  font: inherit;
+}
+
+/* Custom map markers */
+.custom-marker {
+  background: transparent;
+  border: none;
+}
+
+.custom-marker-inner {
+  width: 36px;
+  height: 36px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.custom-marker-inner span {
+  transform: rotate(45deg);
+}
+
+.custom-marker-selected .custom-marker-inner {
+  width: 44px;
+  height: 44px;
+  font-size: 1.3rem;
+  border-width: 3px;
+  z-index: 1000;
+}
+
+/* User location marker */
+.user-location-marker {
+  background: transparent;
+  border: none;
+}
+
+.user-location-inner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 3px solid white;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+}
+
+/* New point marker */
+.new-point-marker {
+  background: transparent;
+  border: none;
+}
+
+.new-point-inner {
+  width: 36px;
+  height: 36px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  background: #f59e0b;
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  animation: pulse 1.5s infinite;
+}
+
+.new-point-inner span {
+  transform: rotate(45deg);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: rotate(-45deg) scale(1); }
+  50% { transform: rotate(-45deg) scale(1.15); }
+}
+
+/* Route polyline is styled by Leaflet directly */
+
+/* === Leaflet Popups === */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--eco-radius);
+  box-shadow: var(--eco-shadow);
+}
+
+.popup-content {
+  min-width: 200px;
+  max-width: 280px;
+}
+
+.popup-content h4 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: var(--eco-text);
+}
+
+.popup-content .popup-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.popup-content .popup-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  color: white;
+}
+
+.popup-content .popup-payment {
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.popup-content .popup-payment.pay {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.popup-content .popup-payment.charge {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.popup-content .popup-payment.free {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.popup-content .popup-meta {
+  font-size: 0.75rem;
+  color: var(--eco-muted);
+  margin-bottom: 4px;
+}
+
+.popup-content .popup-source {
+  font-size: 0.7rem;
+  color: var(--eco-muted);
+  font-style: italic;
+  margin-top: 6px;
+}
+
+.popup-content .popup-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: var(--eco-primary);
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.popup-content .popup-btn:hover {
+  background: var(--eco-primary-dark);
+}
+
+/* === Point Details Panel === */
+.point-details {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 360px;
+  max-width: calc(100vw - 40px);
+  background: var(--eco-white);
+  border-radius: var(--eco-radius);
+  box-shadow: var(--eco-shadow);
+  z-index: 500;
+  overflow: hidden;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.point-details-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--eco-primary-light);
+}
+
+.point-details-header h3 {
+  font-size: 1.1rem;
+  flex: 1;
+  padding-right: 8px;
+}
+
+.point-details-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--eco-muted);
+  padding: 0 4px;
+}
+
+.point-details-close:hover {
+  color: var(--eco-error);
+}
+
+.point-details-body {
+  padding: 16px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+}
+
+.detail-row .detail-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.detail-row .detail-label {
+  font-weight: 600;
+  color: var(--eco-text);
+  min-width: 70px;
+  flex-shrink: 0;
+}
+
+.detail-row .detail-value {
+  color: var(--eco-text);
+  flex: 1;
+}
+
+.detail-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.detail-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: white;
+}
+
+.payment-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.payment-badge.pay {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.payment-badge.charge {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.payment-badge.free {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.payment-badge.none {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.route-info {
+  margin-top: 12px;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.route-info .route-distance {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--eco-primary);
+}
+
+.detail-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.detail-actions .btn {
+  flex: 1;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* === Add Point Form Panel (right-side slide-in) === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 460px;
+  max-width: 100%;
+  background: var(--eco-white);
+  z-index: 2000;
+  overflow-y: auto;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.modal {
+  background: var(--eco-white);
+  width: 100%;
+  height: 100%;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--eco-primary-light);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.modal-header h3 {
+  font-size: 1.1rem;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--eco-muted);
+}
+
+.modal-close:hover {
+  color: var(--eco-error);
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--eco-text);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--eco-text);
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--eco-primary);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.type-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.type-option {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.type-option:hover {
+  border-color: var(--eco-primary);
+}
+
+.type-option.selected {
+  border-color: var(--eco-primary);
+  background: var(--eco-primary-light);
+}
+
+.type-option .type-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.map-prompt {
+  padding: 10px 12px;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.map-prompt.success {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+.coords-display {
+  display: flex;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.coords-display span {
+  flex: 1;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 10px;
+  padding: 16px 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.modal-footer .btn {
+  flex: 1;
+}
+
+.btn-cancel {
+  background: #f1f5f9;
+  color: var(--eco-text);
+}
+
+.btn-cancel:hover {
+  background: #e2e8f0;
+}
+
+/* === Error Banner === */
+.error-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  z-index: 3000;
+  max-width: 500px;
+  box-shadow: var(--eco-shadow);
+}
+
+.error-banner button {
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: none;
+  background: var(--eco-error);
+  color: white;
+  cursor: pointer;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* === Loading Indicator === */
+.loading-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px 32px;
+  border-radius: var(--eco-radius);
+  box-shadow: var(--eco-shadow);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.loading-overlay .loading-spinner {
+  border-color: rgba(22, 163, 74, 0.3);
+  border-top-color: var(--eco-primary);
+  width: 20px;
+  height: 20px;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .filter-panel {
+    width: 100%;
+    min-width: auto;
+    max-height: 45vh;
+  }
+
+  .point-details {
+    left: 10px;
+    right: 10px;
+    width: auto;
+    bottom: 10px;
+  }
+
+  .modal {
+    width: 100%;
+  }
+}

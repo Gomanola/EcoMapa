@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build output
+frontend/dist/
+backend/dist/
+backend/cdk.out/
+
+# Environment
+.env
+.env.local
+
+# CDK
+cdk-outputs.json
+*.cdk.out
+
+# OS
+.DS_Store
+Thumbs.db
